@@ -1,0 +1,55 @@
+{
+  "name": "@varjao/shared-http",
+  "version": "0.1.0",
+  "description": "Utilitários HTTP puros para frontends Varjão (base URL, headers, refresh dedupe)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./baseUrl": {
+      "import": "./dist/baseUrl.js",
+      "types": "./dist/baseUrl.d.ts"
+    },
+    "./headers": {
+      "import": "./dist/headers.js",
+      "types": "./dist/headers.d.ts"
+    },
+    "./authState": {
+      "import": "./dist/authState.js",
+      "types": "./dist/authState.d.ts"
+    },
+    "./refreshCoordinator": {
+      "import": "./dist/refreshCoordinator.js",
+      "types": "./dist/refreshCoordinator.d.ts"
+    },
+    "./errorPredicates": {
+      "import": "./dist/errorPredicates.js",
+      "types": "./dist/errorPredicates.d.ts"
+    },
+    "./deviceContext": {
+      "import": "./dist/deviceContext.js",
+      "types": "./dist/deviceContext.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "keywords": ["http", "refresh", "headers", "baseurl", "varjao"],
+  "author": "Varjão",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  }
+}
