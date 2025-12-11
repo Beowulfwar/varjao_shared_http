@@ -37,7 +37,6 @@ const apiBase = buildApiBaseUrl(import.meta.env.VITE_API_URL); // garante /api/v
 ```ts
 const headers = applyStandardHeaders(existing, {
   accessToken: usuarioToken,
-  empresaToken: empresaToken,
   empresaId,
   deviceId,
   deviceHash,
@@ -50,7 +49,6 @@ const headers = applyStandardHeaders(existing, {
 ```ts
 const refreshCoordinator = createRefreshCoordinator({
   usuario: refreshUsuario,
-  empresa: refreshEmpresa,
   mobile: refreshMobile,
 });
 // dentro do interceptor 401
@@ -61,7 +59,6 @@ return refreshCoordinator.refreshUsuario().then(() => retry());
 ```ts
 if (shouldLogout(error)) { /* limpar sessão */ }
 if (shouldSuppressNotFound(error)) { return error.response; }
-if (isEmpresaMismatch(error)) { /* forçar reativação de empresa */ }
 ```
 
 ### Device headers (seguro para SSR)

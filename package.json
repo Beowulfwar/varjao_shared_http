@@ -35,6 +35,14 @@
       "import": "./dist/deviceContext.js",
       "types": "./dist/deviceContext.d.ts"
     },
+    "./tokenManager": {
+      "import": "./dist/tokenManager.js",
+      "types": "./dist/tokenManager.d.ts"
+    },
+    "./clientFactory": {
+      "import": "./dist/clientFactory.js",
+      "types": "./dist/clientFactory.d.ts"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -42,14 +50,28 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint . --ext .ts,.tsx,.js",
+    "typecheck": "tsc -p tsconfig.typecheck.json"
   },
-  "keywords": ["http", "refresh", "headers", "baseurl", "varjao"],
+  "keywords": [
+    "http",
+    "refresh",
+    "headers",
+    "baseurl",
+    "varjao"
+  ],
   "author": "Varjão",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "typescript": "^5.4.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "typescript": "^5.5.4",
     "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "axios": "^1.13.2"
   }
 }

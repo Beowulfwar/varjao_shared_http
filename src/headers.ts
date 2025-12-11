@@ -32,7 +32,6 @@ export function mergeHeaders(base: HeaderBag = {}, extra: HeaderBag = {}): Heade
 
 export type StandardHeaderOptions = {
   accessToken?: string | null;
-  empresaToken?: string | null;
   empresaId?: string | null;
   deviceId?: string | null;
   deviceHash?: string | null;
@@ -49,12 +48,9 @@ export function applyStandardHeaders(headers: HeaderBag = {}, options: StandardH
     result = ensureHeader(result, 'Authorization', normalizeBearer(options.accessToken));
   }
 
-  if (options.empresaToken) {
-    result = ensureHeader(result, 'X-Empresa-Authorization', normalizeBearer(options.empresaToken));
-  }
-
   if (options.empresaId) {
     result = ensureHeader(result, 'Empresa-ID', options.empresaId);
+    result = ensureHeader(result, 'X-Empresa-ID', options.empresaId);
   }
 
   if (options.deviceId) {

@@ -4,3 +4,6 @@ export * from './authState.js';
 export * from './refreshCoordinator.js';
 export * from './errorPredicates.js';
 export * from './deviceContext.js';
+export * from './types/index.js';
+export * from './tokenManager.js';
+export * from './clientFactory.js';

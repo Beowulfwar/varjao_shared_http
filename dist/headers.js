@@ -33,11 +33,9 @@ export function applyStandardHeaders(headers = {}, options = {}) {
     if (options.accessToken) {
         result = ensureHeader(result, 'Authorization', normalizeBearer(options.accessToken));
     }
-    if (options.empresaToken) {
-        result = ensureHeader(result, 'X-Empresa-Authorization', normalizeBearer(options.empresaToken));
-    }
     if (options.empresaId) {
         result = ensureHeader(result, 'Empresa-ID', options.empresaId);
+        result = ensureHeader(result, 'X-Empresa-ID', options.empresaId);
     }
     if (options.deviceId) {
         result = ensureHeader(result, 'X-Id-Dispositivo', options.deviceId);

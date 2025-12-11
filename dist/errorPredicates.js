@@ -33,7 +33,12 @@ export function isEmpresaMismatch(error) {
     if (status !== 403 && status !== 401)
         return false;
     const detail = textFrom(error.response?.data).toLowerCase();
-    return detail.includes('empresa') && detail.includes('token');
+    const hasEmpresa = detail.includes('empresa');
+    if (!hasEmpresa)
+        return false;
+    const tokenIssue = detail.includes('token');
+    const notFound = detail.includes('nao encontrad') || detail.includes('não encontrad');
+    return tokenIssue || notFound;
 }
 export default {
     shouldLogout,

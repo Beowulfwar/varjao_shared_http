@@ -16,15 +16,14 @@ describe('headers', () => {
   it('aplica headers padrão sem sobrescrever', () => {
     const out = applyStandardHeaders({ Authorization: 'Bearer legacy' }, {
       accessToken: 'xyz',
-      empresaToken: 'abc',
       empresaId: '123',
       deviceId: 'dev',
       deviceHash: 'hash',
       usuarioId: 'u1',
     });
     expect(out.Authorization).toBe('Bearer legacy');
-    expect(out['X-Empresa-Authorization']).toBe('Bearer abc');
     expect(out['Empresa-ID']).toBe('123');
+    expect(out['X-Empresa-ID']).toBe('123');
     expect(out['X-Id-Dispositivo']).toBe('dev');
     expect(out['X-Hash-Agente']).toBe('hash');
     expect(out['X-Usuario-Id']).toBe('u1');

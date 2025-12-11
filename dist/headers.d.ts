@@ -11,7 +11,6 @@ export declare function ensureHeader(headers: HeaderBag, key: string, value: str
 export declare function mergeHeaders(base?: HeaderBag, extra?: HeaderBag): HeaderBag;
 export type StandardHeaderOptions = {
     accessToken?: string | null;
-    empresaToken?: string | null;
     empresaId?: string | null;
     deviceId?: string | null;
     deviceHash?: string | null;
