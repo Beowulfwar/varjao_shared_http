@@ -8,12 +8,18 @@ import axios, {
 import { TokenManager } from "./tokenManager.js";
 import { buildApiBaseUrl } from "./baseUrl.js";
 
+export interface ITokenManager {
+    getAuthHeaders(): Record<string, string>;
+    getToken(): string | null;
+    getRefreshToken?(): string | null;
+}
+
 export interface ApiClientConfig {
     baseUrl: string;
     defaultBaseUrl?: string;
     timeout?: number;
     headers?: Record<string, string>;
-    tokenManager: TokenManager;
+    tokenManager: ITokenManager;
     onForceLogout?: () => void;
     onUnauthorized?: (error: AxiosError) => Promise<void>;
     /**
