@@ -12,14 +12,53 @@ const textFrom = (data) => {
     }
     return '';
 };
+const codeFrom = (data, depth = 0) => {
+    if (!data || typeof data !== 'object' || depth > 4)
+        return '';
+    const payload = data;
+    const candidates = [
+        payload.code,
+        payload.codigo,
+        payload.error_code,
+        payload.errorCode,
+        payload.status_code,
+        payload.statusCode,
+    ];
+    for (const value of candidates) {
+        if (typeof value === 'string' || typeof value === 'number') {
+            return String(value);
+        }
+    }
+    const nested = payload.detail ?? payload.error;
+    if (nested && nested !== data) {
+        return codeFrom(nested, depth + 1);
+    }
+    return '';
+};
 export function shouldLogout(error) {
     const status = error.response?.status;
-    if (status === 401 || status === 403)
+    if (status === 401)
         return true;
-    const detail = textFrom(error.response?.data).toLowerCase();
-    if (!detail)
+    if (status !== 403)
         return false;
-    return detail.includes('sessão expirada') || detail.includes('token inválido') || detail.includes('não autenticado');
+    const detail = textFrom(error.response?.data).toLowerCase();
+    const code = codeFrom(error.response?.data).toLowerCase();
+    if (!detail && !code)
+        return false;
+    const detailSignals = [
+        'sessão expirada',
+        'sessao expirada',
+        'token inválido',
+        'token invalido',
+        'token expirado',
+        'não autenticado',
+        'nao autenticado',
+    ];
+    if (detailSignals.some((signal) => detail.includes(signal))) {
+        return true;
+    }
+    const codeSignals = ['token', 'session', 'sessao', 'unauth'];
+    return codeSignals.some((signal) => code.includes(signal));
 }
 export function shouldSuppressNotFound(error) {
     const status = error.response?.status;

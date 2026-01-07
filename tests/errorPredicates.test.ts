@@ -4,7 +4,8 @@ import { shouldLogout, shouldSuppressNotFound, isEmpresaMismatch } from '../src/
 describe('errorPredicates', () => {
   it('detecta logout por 401/403', () => {
     expect(shouldLogout({ response: { status: 401 } })).toBe(true);
-    expect(shouldLogout({ response: { status: 403 } })).toBe(true);
+    expect(shouldLogout({ response: { status: 403 } })).toBe(false);
+    expect(shouldLogout({ response: { status: 403, data: { detail: 'token inválido' } } })).toBe(true);
     expect(shouldLogout({ response: { status: 500 } })).toBe(false);
   });
 

@@ -1,11 +1,16 @@
 import { AxiosInstance, AxiosError } from "axios";
-import { TokenManager } from "./tokenManager.js";
+export interface ITokenManager {
+    getAuthHeaders(): Record<string, string>;
+    getToken(): string | null;
+    getRefreshToken?(): string | null;
+}
 export interface ApiClientConfig {
     baseUrl: string;
     defaultBaseUrl?: string;
+    apiPath?: string;
     timeout?: number;
     headers?: Record<string, string>;
-    tokenManager: TokenManager;
+    tokenManager: ITokenManager;
     onForceLogout?: () => void;
     onUnauthorized?: (error: AxiosError) => Promise<void>;
     /**

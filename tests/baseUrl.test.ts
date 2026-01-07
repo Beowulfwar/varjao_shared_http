@@ -7,6 +7,11 @@ describe('baseUrl', () => {
     expect(normalizeBaseUrl('https://host/api')).toBe('https://host');
   });
 
+  it('preserva /api/vN quando a base já vem versionada', () => {
+    expect(normalizeBaseUrl('https://host/api/v2')).toBe('https://host/api/v2');
+    expect(buildApiBaseUrl('https://host/api/v2')).toBe('https://host/api/v2');
+  });
+
   it('mantém base fallback quando vazio', () => {
     expect(normalizeBaseUrl('')).toBe('http://localhost:8000');
   });
@@ -14,6 +19,10 @@ describe('baseUrl', () => {
   it('buildApiBaseUrl anexa /api/v1 apenas uma vez', () => {
     expect(buildApiBaseUrl('https://host')).toBe('https://host/api/v1');
     expect(buildApiBaseUrl('https://host/api/v1')).toBe('https://host/api/v1');
+  });
+
+  it('buildApiBaseUrl respeita apiPath customizado', () => {
+    expect(buildApiBaseUrl('https://host', { apiPath: '/api/v2' })).toBe('https://host/api/v2');
   });
 
   it('normaliza trailing slash', () => {

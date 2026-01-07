@@ -1,6 +1,7 @@
 /**
  * Funções puras para normalizar URLs de API.
  * Evita duplicações de "/api"/"/api/v1" e trailing slashes inconsistentes.
+ * Preserva "/api/vN" quando a base já vem versionada.
  */
 export type NormalizeBaseUrlOptions = {
     /** Valor utilizado quando o input for vazio ou inválido. */

@@ -30,7 +30,8 @@ import {
 
 ### Base URL
 ```ts
-const apiBase = buildApiBaseUrl(import.meta.env.VITE_API_URL); // garante /api/v1 sem duplicar
+const apiBase = buildApiBaseUrl(import.meta.env.VITE_API_URL); // preserva /api/vN, anexa /api/v1 quando necessario
+const apiV2 = buildApiBaseUrl(import.meta.env.VITE_API_URL, { apiPath: '/api/v2' });
 ```
 
 ### Headers idempotentes

@@ -1,8 +1,8 @@
 import axios, { AxiosHeaders } from "axios";
 import { buildApiBaseUrl } from "./baseUrl.js";
 export function createApiClient(config) {
-    const { baseUrl, defaultBaseUrl = "http://localhost:8000", timeout = 15000, headers = {}, tokenManager, onForceLogout, onUnauthorized, onTokenRefresh } = config;
-    const resolvedBaseUrl = buildApiBaseUrl(baseUrl, { defaultBase: defaultBaseUrl });
+    const { baseUrl, defaultBaseUrl = "http://localhost:8000", apiPath, timeout = 15000, headers = {}, tokenManager, onForceLogout, onUnauthorized, onTokenRefresh } = config;
+    const resolvedBaseUrl = buildApiBaseUrl(baseUrl, { defaultBase: defaultBaseUrl, apiPath });
     const api = axios.create({
         baseURL: resolvedBaseUrl,
         timeout,

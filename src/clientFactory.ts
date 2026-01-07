@@ -17,6 +17,7 @@ export interface ITokenManager {
 export interface ApiClientConfig {
     baseUrl: string;
     defaultBaseUrl?: string;
+    apiPath?: string;
     timeout?: number;
     headers?: Record<string, string>;
     tokenManager: ITokenManager;
@@ -33,6 +34,7 @@ export function createApiClient(config: ApiClientConfig): AxiosInstance {
     const {
         baseUrl,
         defaultBaseUrl = "http://localhost:8000",
+        apiPath,
         timeout = 15000,
         headers = {},
         tokenManager,
@@ -41,7 +43,7 @@ export function createApiClient(config: ApiClientConfig): AxiosInstance {
         onTokenRefresh
     } = config;
 
-    const resolvedBaseUrl = buildApiBaseUrl(baseUrl, { defaultBase: defaultBaseUrl });
+    const resolvedBaseUrl = buildApiBaseUrl(baseUrl, { defaultBase: defaultBaseUrl, apiPath });
 
     const api = axios.create({
         baseURL: resolvedBaseUrl,
